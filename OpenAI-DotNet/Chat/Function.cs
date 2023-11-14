@@ -93,6 +93,12 @@ namespace OpenAI.Chat
                 {
                     arguments = JsonNode.Parse(argumentsString);
                 }
+                
+                // Ensure that 'arguments' is an empty string if it represents an empty object.
+                if (arguments is JsonObject { Count: 0 })
+                {
+                    arguments = JsonNode.Parse("\"\"");;
+                }
 
                 return arguments;
             }
